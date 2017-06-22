@@ -11,9 +11,9 @@ const bio = {
     twitter: '@fry',
     location: 'Los Angeles'
   },
-  welcomeMsg: 'Hello World!',
+  welcomeMessage: 'Hello World!',
   skills: ['HTML', 'CSS', 'JavaScript', 'Webpack'],
-  picURL: 'images/fry.jpg',
+  biopic: 'images/fry.jpg',
 
   display() {
     const formattedName = HTMLheaderName.replace('%data%', bio.name);
@@ -25,36 +25,19 @@ const bio = {
     const formattedTwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
     const formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
 
-    const formattedPicture = HTMLbioPic.replace('%data%', bio.picURL);
-    const formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMsg);
+    const formattedPicture = HTMLbioPic.replace('%data%', bio.biopic);
+    const formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
 
     //Name and Role
-    $('#header').prepend(formattedRole);
-    $('#header').prepend(formattedName);
-
+    $('#header').prepend(formattedName, formattedRole);
     //Header Contacts
-    $('#topContacts').append(formattedMobile);
-    $('#topContacts').append(formattedEmail);
-    $('#topContacts').append(formattedGithub);
-    $('#topContacts').append(formattedTwitter);
-    $('#topContacts').append(formattedLocation);
-
+    $('#topContacts, #footerContacts').append(formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
     //BioPic and skills
-    $('#header').append(formattedPicture);
-    $('#header').append(formattedWelcomeMsg);
-    $('#header').append(HTMLskillsStart);
-
+    $('#header').append(formattedPicture, formattedWelcomeMsg, HTMLskillsStart);
     //Skills
     const formattedSkills = bio.skills.forEach(skill => {
       $('#header').append(HTMLskills.replace('%data%', skill));
     });
-
-    //Footer Contacts
-    $('#footerContacts').append(formattedMobile);
-    $('#footerContacts').append(formattedEmail);
-    $('#footerContacts').append(formattedGithub);
-    $('#footerContacts').append(formattedTwitter);
-    $('#footerContacts').append(formattedLocation);
   }
 };
 
@@ -135,7 +118,7 @@ const work = {
   }
 };
 
-const project = {
+const projects = {
   projects: [
     {
       title: 'Sample Project 1',
@@ -154,7 +137,7 @@ const project = {
   display() {
     $('#projects').append(HTMLprojectStart);
 
-    project.projects.forEach((project, i) => {
+    projects.projects.forEach(project => {
       $('.project-entry').append(HTMLprojectTitle.replace('%data%', `${project.title}`));
       $('.project-entry').append(HTMLprojectDates.replace('%data%', `${project.dates}`));
       $('.project-entry').append(HTMLprojectDescription.replace('%data%', `${project.description}`));
@@ -172,4 +155,4 @@ $('#mapDiv').append(googleMap);
 education.display();
 bio.display();
 work.display();
-project.display();
+projects.display();
